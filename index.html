@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mohamed Moughamir — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f3ec; --ink:#16181d; --muted:#5d6370; --line:#ddd6c8;
+    --card:#fffdf8; --accent:#1f5f4a; --accent-soft:#e3efe9; --tag:#efe9dd;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#121417; --ink:#ece8df; --muted:#9aa0aa; --line:#2a2e35;
+      --card:#191c21; --accent:#6fc4a3; --accent-soft:#1d2d27; --tag:#23272e; }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.6;font-size:16px}
+  a{color:inherit}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+
+  nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:60px}
+  .logo{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:14px;text-decoration:none}
+  .logo span{color:var(--accent)}
+  nav ul{display:flex;gap:22px;list-style:none}
+  nav ul a{text-decoration:none;font-size:14px;color:var(--muted)}
+  nav ul a:hover{color:var(--ink)}
+  @media (max-width:640px){ nav ul{gap:14px} nav ul li:not(:nth-child(2)):not(:nth-child(5)){display:none} }
+
+  header{padding:96px 0 72px;border-bottom:1px solid var(--line)}
+  .kicker{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--accent);letter-spacing:.04em;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+  h1{font-family:"Fraunces",serif;font-weight:700;font-size:clamp(40px,7vw,76px);line-height:1.02;letter-spacing:-.02em;max-width:14ch}
+  h1 em{font-style:normal;color:var(--accent)}
+  .lead{margin-top:26px;max-width:58ch;font-size:18px;color:var(--muted)}
+  .cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font-size:14px;font-weight:500;text-decoration:none;border:1px solid var(--ink)}
+  .btn.primary{background:var(--ink);color:var(--bg)}
+  .btn:hover{transform:translateY(-1px)}
+  .facts{margin-top:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .facts div{background:var(--card);padding:18px 20px}
+  .facts b{display:block;font-family:"Fraunces",serif;font-size:20px;font-weight:500}
+  .facts small{color:var(--muted);font-size:13px}
+
+  section{padding:80px 0;border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:36px}
+  .num{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--accent)}
+  h2{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(28px,4vw,40px);letter-spacing:-.01em}
+
+  .about{display:grid;grid-template-columns:1.4fr 1fr;gap:48px}
+  .about p{margin-bottom:16px;max-width:60ch}
+  .about aside{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+  .about aside h3{font-size:13px;font-family:"IBM Plex Mono",monospace;font-weight:500;color:var(--muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em}
+  .about aside ul{list-style:none}
+  .about aside li{padding:8px 0;border-top:1px dashed var(--line);font-size:15px}
+  .about aside li:first-child{border-top:0}
+  @media (max-width:800px){ .about{grid-template-columns:1fr} }
+
+  .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  @media (max-width:800px){ .projects{grid-template-columns:1fr} }
+  .proj{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;display:flex;flex-direction:column;transition:border-color .2s, transform .2s}
+  .proj:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .proj.wide{grid-column:1/-1}
+  .proj-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+  .proj h3{font-family:"Fraunces",serif;font-size:24px;font-weight:500;line-height:1.2}
+  .ctx{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);white-space:nowrap;padding-top:6px}
+  .proj p{color:var(--muted);margin-bottom:14px}
+  .proj ul{margin:0 0 18px 18px;font-size:15px}
+  .proj li{margin-bottom:6px}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+  .tag{font-family:"IBM Plex Mono",monospace;font-size:12px;background:var(--tag);padding:4px 10px;border-radius:6px}
+  .role{display:inline-block;font-size:12px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:3px 10px;border-radius:999px;margin-bottom:12px;align-self:flex-start}
+
+  .timeline{position:relative;margin-left:8px}
+  .timeline::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:1px;background:var(--line)}
+  .t-item{position:relative;padding-left:32px;margin-bottom:36px}
+  .t-item::before{content:"";position:absolute;left:-5px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+  .t-date{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--muted)}
+  .t-item h3{font-size:19px;font-weight:600;margin:2px 0 4px}
+  .t-item .org{color:var(--accent);font-weight:500}
+  .t-item p{color:var(--muted);max-width:66ch;margin-top:6px}
+
+  .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+  .sk{border-top:2px solid var(--ink);padding-top:16px}
+  .sk h3{font-size:15px;font-weight:600;margin-bottom:12px}
+  .sk .tags{margin-top:0}
+
+  .cert{margin-top:40px;display:flex;align-items:center;gap:20px;background:var(--accent-soft);border-radius:16px;padding:24px 28px}
+  .badge{flex:none;width:58px;height:58px;border-radius:14px;background:var(--accent);color:var(--bg);display:grid;place-items:center;font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:14px}
+  .cert b{font-size:17px}
+  .cert small{display:block;color:var(--muted)}
+
+  .contact{text-align:left}
+  .contact h2{font-size:clamp(32px,5vw,52px);max-width:18ch;margin-bottom:18px}
+  .contact p{color:var(--muted);max-width:56ch;margin-bottom:30px}
+  .links{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .link{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .link:hover{border-color:var(--accent)}
+  .link small{display:block;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);margin-bottom:4px}
+  .link span{font-weight:500;word-break:break-all}
+  .copy{margin-top:10px;font:inherit;font-size:13px;background:none;border:1px solid var(--line);border-radius:8px;padding:4px 10px;cursor:pointer;color:var(--muted)}
+
+  footer{padding:32px 0;font-size:13px;color:var(--muted);font-family:"IBM Plex Mono",monospace}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.on{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1;transform:none;transition:none} html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">mohamed<span>.</span>moughamir</a>
+    <ul>
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap">
+    <div class="kicker"><span class="dot"></span>Disponible pour un stage PFE · février 2027</div>
+    <h1>Mohamed Moughamir, <em>développeur full-stack</em> Java &amp; SAP.</h1>
+    <p class="lead">Élève ingénieur en dernière année à l'EMSI Casablanca, filière Développement et Systèmes d'Information. Je conçois des applications complètes, de l'API Spring Boot à l'interface React, et je veux mettre ce profil de développeur au service de projets ERP / SAP.</p>
+    <div class="cta">
+      <a class="btn primary" href="#projets">Voir mes projets ↓</a>
+      <a class="btn" href="CV_Moughamir.pdf" target="_blank" rel="noopener">Télécharger mon CV</a>
+      <a class="btn" href="#contact">Me contacter</a>
+    </div>
+    <div class="facts">
+      <div><b>5e année</b><small>EMSI · Casa Maarif</small></div>
+      <div><b>OCP Java SE 17</b><small>Certification Oracle</small></div>
+      <div><b>2 stages</b><small>Marsa Maroc · EBERTEC</small></div>
+      <div><b>Casablanca / Rabat</b><small>PFE de 4 à 6 mois</small></div>
+    </div>
+  </div>
+</header>
+
+<section id="apropos">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">01</span><h2>À propos</h2></div>
+    <div class="about">
+      <div class="reveal">
+        <p>Je travaille surtout avec Java et Spring Boot côté back-end, et React ou Next.js côté front. Je suis à l'aise avec les bases SQL comme NoSQL, et j'ai aussi fait du mobile (Android en Java, Flutter).</p>
+        <p>J'ai découvert SAP chez EBERTEC en travaillant sur les données de facturation du module SD : j'y ai automatisé un reporting qui prenait deux jours. Ce qui m'attire dans SAP, c'est le lien entre les processus métier et le système d'information.</p>
+        <p>Pour mon PFE, je cherche un sujet en SAP ou en développement full-stack Java.</p>
+      </div>
+      <aside class="reveal">
+        <h3>En bref</h3>
+        <ul>
+          <li>📍 Casablanca, Maroc</li>
+          <li>🎓 Ingénierie — Développement et Systèmes d'Information (2022 – 2027)</li>
+          <li>🗣️ Arabe, français, anglais</li>
+          <li>🔭 En dehors du code : l'astronomie</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">02</span><h2>Projets</h2></div>
+    <div class="projects">
+
+      <article class="proj wide reveal">
+        <span class="role">Responsable backend / API · en production sur Vercel</span>
+        <div class="proj-top"><h3>PointTrack — gestion digitale du pointage</h3><span class="ctx">PFA · 03 – 06/2026</span></div>
+        <p>Application web RH où les employés pointent avec un QR code dynamique, vérifié par géolocalisation GPS.</p>
+        <ul>
+          <li>Authentification JWT en cookies httpOnly, comptes créés par l'administrateur</li>
+          <li>Gestion des congés et tableaux de bord de présence</li>
+          <li>Application déployée et utilisée en production</li>
+        </ul>
+        <div class="tags"><span class="tag">Next.js 14</span><span class="tag">MongoDB Atlas</span><span class="tag">Tailwind CSS</span><span class="tag">shadcn/ui</span><span class="tag">JWT</span></div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-top"><h3>Reporting SAP SD automatisé</h3><span class="ctx">Stage · EBERTEC</span></div>
+        <p>Relevés de factures par client générés automatiquement à partir des données de facturation SAP SD.</p>
+        <ul>
+          <li>Macro VBA : regroupement, tri par article, sous-totaux, totaux HT / TVA / TTC</li>
+          <li><b>De 2 jours à quelques secondes</b> par client</li>
+          <li>Tableaux de bord Metabase pour les équipes commerciales</li>
+        </ul>
+        <div class="tags"><span class="tag">SAP SD</span><span class="tag">VBA</span><span class="tag">Excel</span><span class="tag">Metabase</span></div>
+      </article>
+
+      <article class="proj reveal">
+        <span class="role">Product Owner · équipe de 5</span>
+        <div class="proj-top"><h3>TRIPOVA — plateforme touristique</h3><span class="ctx">PFA · 2025 – 2026</span></div>
+        <p>Plateforme collaborative pour découvrir des lieux et des activités à travers le monde, avec avis et communauté.</p>
+        <ul>
+          <li>Système d'avis et de communauté</li>
+          <li>Sécurité : validation des entrées, protection IDOR, Content Security Policy</li>
+        </ul>
+        <div class="tags"><span class="tag">React.js</span><span class="tag">Spring Boot</span><span class="tag">MongoDB</span><span class="tag">Scrum</span></div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-top"><h3>Infrastructure vSphere haute disponibilité</h3><span class="ctx">Stage · Marsa Maroc</span></div>
+        <p>Maquette d'infrastructure de virtualisation VMware axée sur la haute disponibilité.</p>
+        <ul>
+          <li>Hôtes ESXi et stockage partagé iSCSI sur TrueNAS</li>
+          <li>Active Directory sous Windows Server, réseau vMotion</li>
+          <li>Étude de HA, DRS, vMotion et FT</li>
+        </ul>
+        <div class="tags"><span class="tag">VMware ESXi</span><span class="tag">vCenter</span><span class="tag">iSCSI</span><span class="tag">Active Directory</span></div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-top"><h3>Gestion des actions de charité</h3><span class="ctx">Projet de module · 01/2026</span></div>
+        <p>Application web pour organiser des événements caritatifs et collecter des dons.</p>
+        <ul>
+          <li>Gestion des événements et des dons, paiement en ligne</li>
+          <li>Sécurisation avec Spring Security</li>
+        </ul>
+        <div class="tags"><span class="tag">Spring Boot</span><span class="tag">MySQL</span><span class="tag">Thymeleaf</span></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="parcours">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">03</span><h2>Parcours</h2></div>
+    <div class="timeline">
+      <div class="t-item reveal">
+        <div class="t-date">Juillet – septembre 2026</div>
+        <h3>Stagiaire Digitalisation &amp; IT · <span class="org">Marsa Maroc</span>, Casablanca</h3>
+        <p>Maquette d'infrastructure VMware vSphere (ESXi, stockage iSCSI, Active Directory) axée sur la haute disponibilité.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-date">Juillet 2025</div>
+        <h3>Stagiaire · <span class="org">EBERTEC</span> (Groupe Diana Holding), Casablanca</h3>
+        <p>Automatisation du reporting de facturation SAP SD en VBA et tableaux de bord Metabase.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-date">2022 – 2027</div>
+        <h3>Diplôme d'ingénieur · <span class="org">EMSI</span>, Casablanca</h3>
+        <p>Développement et Systèmes d'Information.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-date">2021 – 2022</div>
+        <h3>Baccalauréat scientifique · <span class="org">Lycée Salah Eddine Ayoubi</span></h3>
+        <p>Sciences physiques.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">04</span><h2>Compétences</h2></div>
+    <div class="skills">
+      <div class="sk reveal"><h3>SAP &amp; données</h3><div class="tags"><span class="tag">Module SD</span><span class="tag">Extraction SAP</span><span class="tag">SQL</span><span class="tag">Excel / VBA</span><span class="tag">Metabase</span></div></div>
+      <div class="sk reveal"><h3>Back-end</h3><div class="tags"><span class="tag">Java 17</span><span class="tag">Spring Boot</span><span class="tag">Spring Security / JWT</span><span class="tag">Data JPA</span><span class="tag">Node.js</span><span class="tag">Next.js</span><span class="tag">ASP.NET</span><span class="tag">Django</span><span class="tag">API REST</span></div></div>
+      <div class="sk reveal"><h3>Front-end &amp; mobile</h3><div class="tags"><span class="tag">React.js</span><span class="tag">JavaScript</span><span class="tag">HTML / CSS</span><span class="tag">Tailwind</span><span class="tag">Bootstrap</span><span class="tag">Android (Java)</span><span class="tag">Firebase</span></div></div>
+      <div class="sk reveal"><h3>Bases de données</h3><div class="tags"><span class="tag">Oracle (PL/SQL)</span><span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">SQL Server</span><span class="tag">MongoDB</span></div></div>
+      <div class="sk reveal"><h3>Méthodes &amp; outils</h3><div class="tags"><span class="tag">UML</span><span class="tag">SOLID</span><span class="tag">Design patterns</span><span class="tag">Agile / Scrum</span><span class="tag">Git / GitHub</span><span class="tag">Maven</span><span class="tag">Postman</span></div></div>
+    </div>
+    <div class="cert reveal">
+      <div class="badge">OCP</div>
+      <div><b>Oracle Certified Professional — Java SE 17 Developer</b><small>Examen 1Z0-829 · aussi : certificats Coursera JavaScript, React / React Native, Python, POO C++, Unix</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">05</span></div>
+    <h2 class="reveal">Un sujet de PFE à proposer ?</h2>
+    <p class="reveal">Je cherche un stage de fin d'études de 4 à 6 mois à partir de février 2027, à Casablanca ou Rabat. N'hésitez pas à m'écrire.</p>
+    <div class="links reveal">
+      <div class="link">
+        <small>E-mail</small><span id="mail">mohamedmoughamir0@gmail.com</span><br>
+        <button class="copy" data-copy="mohamedmoughamir0@gmail.com">Copier</button>
+      </div>
+      <a class="link" href="https://www.linkedin.com/in/mohamed-moughamir" target="_blank" rel="noopener"><small>LinkedIn</small><span>linkedin.com/in/mohamed-moughamir ↗</span></a>
+      <a class="link" href="https://github.com/mohamedmoughamir0-dev" target="_blank" rel="noopener"><small>GitHub</small><span>github.com/mohamedmoughamir0-dev ↗</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span>© 2026 Mohamed Moughamir</span><span>Casablanca, Maroc</span></div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), {threshold: .12});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = 'Copié ✓'; }
+    catch { b.textContent = 'Sélectionnez le texte'; }
+    setTimeout(() => b.textContent = 'Copier', 2000);
+  }));
+</script>
+</body>
+</html>
